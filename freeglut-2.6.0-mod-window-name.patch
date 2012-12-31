@@ -1,0 +1,57 @@
+diff -crN freeglut-2.6.0/include/GL/freeglut_std.h freeglut-2.6.0-mod-window-name/include/GL/freeglut_std.h
+*** freeglut-2.6.0/include/GL/freeglut_std.h	2009-08-10 20:39:58.000000000 +0200
+--- freeglut-2.6.0-mod-window-name/include/GL/freeglut_std.h	2011-12-13 11:30:47.000000000 +0100
+***************
+*** 539,545 ****
+   * Game mode functions, see freeglut_gamemode.c
+   */
+  FGAPI void    FGAPIENTRY glutGameModeString( const char* string );
+! FGAPI int     FGAPIENTRY glutEnterGameMode( void );
+  FGAPI void    FGAPIENTRY glutLeaveGameMode( void );
+  FGAPI int     FGAPIENTRY glutGameModeGet( GLenum query );
+  
+--- 539,545 ----
+   * Game mode functions, see freeglut_gamemode.c
+   */
+  FGAPI void    FGAPIENTRY glutGameModeString( const char* string );
+! FGAPI int     FGAPIENTRY glutEnterGameMode( char *wName );
+  FGAPI void    FGAPIENTRY glutLeaveGameMode( void );
+  FGAPI int     FGAPIENTRY glutGameModeGet( GLenum query );
+  
+diff -crN freeglut-2.6.0/src/freeglut_gamemode.c freeglut-2.6.0-mod-window-name/src/freeglut_gamemode.c
+*** freeglut-2.6.0/src/freeglut_gamemode.c	2007-09-16 05:57:04.000000000 +0200
+--- freeglut-2.6.0-mod-window-name/src/freeglut_gamemode.c	2011-12-13 11:29:56.000000000 +0100
+***************
+*** 413,419 ****
+  /*
+   * Enters the game mode
+   */
+! int FGAPIENTRY glutEnterGameMode( void )
+  {
+      FREEGLUT_EXIT_IF_NOT_INITIALISED ( "glutEnterGameMode" );
+  
+--- 413,419 ----
+  /*
+   * Enters the game mode
+   */
+! int FGAPIENTRY glutEnterGameMode( char *wName )
+  {
+      FREEGLUT_EXIT_IF_NOT_INITIALISED ( "glutEnterGameMode" );
+  
+***************
+*** 429,435 ****
+      }
+  
+      fgStructure.GameModeWindow = fgCreateWindow(
+!         NULL, "FREEGLUT", GL_TRUE, 0, 0,
+          GL_TRUE, fgState.GameModeSize.X, fgState.GameModeSize.Y,
+          GL_TRUE, GL_FALSE
+      );
+--- 429,435 ----
+      }
+  
+      fgStructure.GameModeWindow = fgCreateWindow(
+!         NULL, wName, GL_TRUE, 0, 0,
+          GL_TRUE, fgState.GameModeSize.X, fgState.GameModeSize.Y,
+          GL_TRUE, GL_FALSE
+      );
